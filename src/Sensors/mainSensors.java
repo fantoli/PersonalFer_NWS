@@ -1,0 +1,1110 @@
+package Sensors;
+import static java.lang.System.console;
+import Sensors.serverConnection;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.apache.commons.net.ftp.FTPClient;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import nwstcrpi.clsPreferences;
+import nwstcrpi.Factory;
+/**
+ * @author amartinez
+ */
+
+public class mainSensors extends javax.swing.JFrame {
+
+    /**
+     * Creates new form mainSensors
+     */
+    
+       
+        Factory Factory = new Factory();
+       
+        clsPreferences _preferences = Factory.GetPreferences();
+    
+   
+    public mainSensors() throws Exception {
+        initComponents();
+        
+       
+        if (_preferences.getDHT22_Enabled()){
+           _preferences.setDHT22_Enabled(false);
+           System.out.println(_preferences.getDHT22_Enabled());
+        }
+        else{
+           _preferences.setDHT22_Enabled(true);
+           System.out.println(_preferences.getDHT22_Enabled());
+        }
+        
+        
+        try {
+            this.txtPresent.setText(String.valueOf(_preferences.getDHT22_Present()));
+            this.txtTemperature.setText(String.valueOf(_preferences.getDHT22_SensorNumber_Temperature()));
+            this.txtHumidity.setText(String.valueOf(_preferences.getDHT22_SensorNumber_Humidity()));
+            this.txtSensor.setText(String.valueOf(_preferences.getDHT22_SensorPin()));
+            this.txtDuration.setText(String.valueOf(_preferences.getReadTimePeriod()));
+            this.txtMQ2present.setText(String.valueOf(_preferences.getMQ2_Present()));
+            this.txtMQ2LPG.setText(String.valueOf(_preferences.getMQ2_SensorNumber_LPG()));
+            this.txtMQ2CO.setText(String.valueOf(_preferences.getMQ2_SensorNumber_CO()));
+            this.txtMQ2SMOKE.setText(String.valueOf(_preferences.getMQ2_SensorNumber_SMOKE()));
+            this.txtSensorport.setText(String.valueOf(_preferences.getMQ2_SensorPort()));
+            this.txtBoardResistance.setText(String.valueOf(_preferences.getMQ2_SensorResistance()));
+            this.txtSensorResistance.setText(String.valueOf(_preferences.getMQ2_SensorResistance()));
+            
+            this.txtMQ2Enabled.setText(String.valueOf(_preferences.getMQ2_Enabled()));
+            this.txtEnabled.setText(String.valueOf(_preferences.getDHT22_Enabled()));
+            
+   
+           
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+        
+        
+        this.setLocationRelativeTo(null);
+        
+        
+       
+    }
+    
+    public void SavePreferences() throws Exception{
+        
+       clsPreferences _preferences; 
+        
+       Factory Factory;
+       Factory = new Factory();
+       
+       _preferences = Factory.GetPreferences();
+       
+       _preferences.setDHT22_SensorNumber_Temperature(Integer.parseInt(txtTemperature.getText()));
+       _preferences.setDHT22_SensorNumber_Humidity(Integer.parseInt(txtHumidity.getText()));
+       _preferences.setDHT22_SensorPin(Integer.parseInt(txtSensor.getText()));
+       _preferences.setDHT22_Present(Boolean.parseBoolean(txtPresent.getText()));
+       _preferences.setDHT22_Enabled(Boolean.parseBoolean(txtEnabled.getText()));
+        
+          
+       Boolean isSelected = chkPresent.isSelected();
+       
+//       if(isSelected){
+//           chkPresent.setSelected(_preferences.setDHT22_Enabled());
+//       } else {
+//           chkPresent.setSelected(_preferences.setDHT22_Enabled(Boolean.getBoolean(isSelected)));
+//       }
+       
+       
+        try {
+            _preferences.Save();
+        } catch (Exception ex) {
+            Logger.getLogger(mainSensors.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println(_preferences.getDHT22_SensorNumber_Temperature());
+        
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jPanel1 = new javax.swing.JPanel();
+        label1 = new java.awt.Label();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtIP = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
+        btnClear = new javax.swing.JButton();
+        btnConnect = new javax.swing.JButton();
+        txtPass = new javax.swing.JPasswordField();
+        jLabel11 = new javax.swing.JLabel();
+        chkShowPassword = new javax.swing.JCheckBox();
+        chkEnable = new javax.swing.JCheckBox();
+        chkAnonimous = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        txtPassive = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtDuration = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtSensor = new javax.swing.JTextField();
+        label2 = new java.awt.Label();
+        txtTemperature = new javax.swing.JTextField();
+        txtHumidity = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        btnSaveReadings = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtPresent = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtEnabled = new javax.swing.JTextField();
+        chkPresent = new javax.swing.JCheckBox();
+        chkEnabled = new javax.swing.JCheckBox();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtMQ2present = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtMQ2LPG = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtMQ2CO = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtMQ2SMOKE = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtSensorport = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtBoardResistance = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtSensorResistance = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        txtMQ2Enabled = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        label1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        label1.setForeground(new java.awt.Color(0, 0, 0));
+        label1.setText("Server connection");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Server:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("User:");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Password:");
+
+        txtIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIPActionPerformed(evt);
+            }
+        });
+
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
+
+        btnClear.setText("CLEAR");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
+        btnConnect.setText("CONNECT");
+        btnConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConnectActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        chkShowPassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        chkShowPassword.setText("Show/Hide password");
+        chkShowPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkShowPasswordActionPerformed(evt);
+            }
+        });
+
+        chkEnable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        chkEnable.setSelected(true);
+        chkEnable.setText("Enable");
+        chkEnable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkEnableActionPerformed(evt);
+            }
+        });
+
+        chkAnonimous.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        chkAnonimous.setText("Anonimous");
+        chkAnonimous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAnonimousActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Passive:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Duration (s)");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6))
+                                        .addGap(6, 6, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtUser)
+                                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(chkShowPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtPassive, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                            .addComponent(chkAnonimous, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtIP, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel11))
+                            .addComponent(chkEnable))
+                        .addGap(88, 88, 88))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkEnable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(txtPassive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chkAnonimous)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chkShowPassword)))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClear)
+                    .addComponent(btnConnect))
+                .addGap(17, 17, 17))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Sensor Pin:");
+
+        txtSensor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSensorActionPerformed(evt);
+            }
+        });
+
+        label2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        label2.setForeground(new java.awt.Color(0, 0, 0));
+        label2.setText("Sensor propieties");
+
+        txtTemperature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTemperatureActionPerformed(evt);
+            }
+        });
+
+        txtHumidity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHumidityActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("Temperature:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Humidity:");
+        jLabel8.setToolTipText("");
+
+        btnSaveReadings.setText("Save");
+        btnSaveReadings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveReadingsActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Present:");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Enabled:");
+
+        chkPresent.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        chkPresent.setText("present");
+        chkPresent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPresentActionPerformed(evt);
+            }
+        });
+
+        chkEnabled.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        chkEnabled.setText("enabled");
+        chkEnabled.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkEnabledActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("MQ2 propieties");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setText("MQ2 Present:");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setText("MQ2 Sensor Number LPG:");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel15.setText("MQ2 Sensor Number CO:");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("MQ2 Sensor Number SMOKE:");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setText("MQ2 Sensorport:");
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel18.setText("MQ2 Board Resistance:");
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel19.setText("MQ2 Sensor Resistance:");
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel20.setText("MQ2 Enabled:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPresent, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkPresent)
+                                    .addComponent(chkEnabled)))
+                            .addComponent(txtSensor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(63, 63, 63)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHumidity, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMQ2present, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtMQ2LPG)
+                                .addComponent(txtMQ2CO, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                            .addComponent(txtMQ2SMOKE, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(10, 10, 10))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel20))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtSensorport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBoardResistance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtSensorResistance)
+                                .addComponent(txtMQ2Enabled, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(btnSaveReadings)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel2)
+                    .addComponent(txtSensor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtHumidity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(chkPresent)
+                    .addComponent(txtPresent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(chkEnabled)))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtMQ2present, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtSensorport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtMQ2LPG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtBoardResistance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMQ2CO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel19)
+                    .addComponent(txtSensorResistance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(txtMQ2SMOKE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(txtMQ2Enabled, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSaveReadings)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        jMenu1.setText("File");
+
+        jMenuItem1.setText("OpenFTP");
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+
+        jMenuItem2.setText("Temperatures");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    
+    private void txtSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSensorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSensorActionPerformed
+
+    private void txtTemperatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTemperatureActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTemperatureActionPerformed
+
+    private void txtHumidityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHumidityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHumidityActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void btnSaveReadingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveReadingsActionPerformed
+        try {
+            SavePreferences();
+        } catch (Exception ex) {
+            Logger.getLogger(mainSensors.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        try {
+            //Con estas instrucciones se obtiene en memoria el contenido completo del fichero XML
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            //Elemento raíz
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement("root");
+            doc.appendChild(rootElement);
+            //Primer elemento
+            Element elemento1 = doc.createElement("configuration");
+            rootElement.appendChild(elemento1);
+            //Hay métodos de la clase Document que permiten la creación de cada uno 
+            //de los posibles tipos de nodos admitidos por XML como CreateElement o CreateAttribute
+            //Se agrega un atributo al nodo frequency y su valor
+            Attr attr = doc.createAttribute("id");
+            attr.setValue("config");
+            elemento1.setAttributeNode(attr);
+            
+            //Con frequency
+            Element temperature = doc.createElement("temperature");
+            temperature.setTextContent(txtTemperature.getText());
+            rootElement.appendChild(temperature);
+            //Con duration
+            Element humidity = doc.createElement("humidity");
+            humidity.setTextContent(txtHumidity.getText());
+            rootElement.appendChild(humidity);
+            //Con sensor pin
+            Element pin = doc.createElement("sensorPin");
+            pin.setTextContent(txtSensor.getText());
+            rootElement.appendChild(pin);
+            //Con present
+            Element present = doc.createElement("DHT22_present");
+            present.setTextContent(txtPresent.getText());
+            rootElement.appendChild(humidity);
+            //Con enabled
+            Element enabled = doc.createElement("enabled");
+            enabled.setTextContent(txtEnabled.getText());
+            rootElement.appendChild(enabled);
+            //Con MQ2Present
+            Element mq2present = doc.createElement("MQ2Present");
+            mq2present.setTextContent(txtMQ2present.getText());
+            rootElement.appendChild(mq2present);
+            //Con MQ2SensorNumberLPG
+            Element mq2SensorLPG = doc.createElement("MQ2SensorLPG");
+            mq2SensorLPG.setTextContent(txtMQ2LPG.getText());
+            rootElement.appendChild(mq2SensorLPG);
+            //Con MQ2SensorNumberCO
+            Element mq2SensorCO = doc.createElement("MQ2SensorCO");
+            mq2SensorCO.setTextContent(txtMQ2CO.getText());
+            rootElement.appendChild(mq2SensorCO);
+            //Con MQ2SensorNumberSMOKE
+            Element mq2SensorSMOKE = doc.createElement("MQ2SensorSMOKE");
+            mq2SensorSMOKE.setTextContent(txtMQ2SMOKE.getText());
+            rootElement.appendChild(mq2SensorSMOKE);
+            //Con MQ2SensorPort
+            Element mq2SensorPort = doc.createElement("MQ2SensorPort");
+            mq2SensorPort.setTextContent(txtSensorport.getText());
+            rootElement.appendChild(mq2SensorPort);
+            //Con MQ2BoardResistance
+            Element mq2BoardResistance = doc.createElement("MQ2BoardResistance");
+            mq2BoardResistance.setTextContent(txtBoardResistance.getText());
+            rootElement.appendChild(mq2BoardResistance);
+            //Con MQ2SensorResistance
+            Element mq2SensorResistance = doc.createElement("MQ2SensorResistance");
+            mq2SensorResistance.setTextContent(txtSensorResistance.getText());
+            rootElement.appendChild(mq2SensorResistance);
+            //Con MQ2Enabled
+            Element mq2Enabled = doc.createElement("MQ2Enabled");
+            mq2Enabled.setTextContent(txtMQ2Enabled.getText());
+            rootElement.appendChild(mq2Enabled);
+            
+            //Se escribe el contenido del XML en un archivo
+            //Para realizar cualquiera de esas operaciones, es necesario crear previamente un 
+            //transformador al que se le indique el documento y el destino que se le va a dar.
+            //La clase Transformer para generará un archivo de texto con el contenido del XML.
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            //Construcción de la ruta
+
+//            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+//            LocalDate localDate = LocalDate.now();
+//
+//            DateTimeFormatter dtt = DateTimeFormatter.ofPattern("HH-mm-ss");
+//            LocalTime localTime = LocalTime.now();
+//
+//            String nombreArchivo = txtNombre.getText();
+            String username = System.getProperty("user.name");
+            String Ruta = "C:\\Users\\" + username + "\\results\\";
+            String XML = "Settings_results.xml";
+            String strRuta = Ruta + XML;
+            StreamResult result = new StreamResult(new File(strRuta));
+
+            transformer.transform(source, result);
+            JOptionPane.showMessageDialog(null, "XML guardado en la ruta: " + strRuta, "Guardado", JOptionPane.INFORMATION_MESSAGE);
+        }catch(ParserConfigurationException pce) {
+            pce.printStackTrace();
+        }catch(TransformerException tfe) {
+       
+//            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+//            LocalDate localDate = LocalDate.now();
+//
+//            DateTimeFormatter dtt = DateTimeFormatter.ofPattern("HH-mm-ss");
+//            LocalTime localTime = LocalTime.now();
+//            String nombreArchivo = txtNombre.getText();
+            String XML = "Settings_results.xml";
+            String username = System.getProperty("user.name");
+            String Ruta = "C:\\Users\\" + username + "\\results\\";
+            String strRuta = Ruta + XML;
+            tfe.printStackTrace();
+            
+            int warning = JOptionPane.showConfirmDialog(null, "Error al guardar el XML, no existe la ruta. ¿Desea crear la ruta " + strRuta + " ?", null, JOptionPane.YES_NO_OPTION);
+      
+            if(warning == JOptionPane.YES_OPTION)
+            {
+                File directorio = new File(Ruta);
+                directorio.mkdirs();
+                File archivo = new File(Ruta,XML);
+
+                try {
+                    //Mismo codigo que en btnSave Action Performance
+                    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+                    Document doc = docBuilder.newDocument();
+                    Element rootElement = doc.createElement("root");
+                    doc.appendChild(rootElement);
+
+                    Element elemento1 = doc.createElement("configuration");
+                    rootElement.appendChild(elemento1);
+
+                    Attr attr = doc.createAttribute("id");
+                    attr.setValue("config");
+                    elemento1.setAttributeNode(attr);
+
+                    //Con frequency
+                    Element temperature = doc.createElement("temperature");
+                    temperature.setTextContent(txtTemperature.getText());
+                    rootElement.appendChild(temperature);
+                    //Con duration
+                    Element humidity = doc.createElement("humidity");
+                    humidity.setTextContent(txtHumidity.getText());
+                    rootElement.appendChild(humidity);
+                    //Con sensor pin
+                    Element pin = doc.createElement("sensorPin");
+                    pin.setTextContent(txtSensor.getText());
+                    rootElement.appendChild(pin);
+                    //Con present
+                    Element present = doc.createElement("DHT22_present");
+                    present.setTextContent(txtPresent.getText());
+                    rootElement.appendChild(humidity);
+                    //Con enabled
+                    Element enabled = doc.createElement("enabled");
+                    enabled.setTextContent(txtEnabled.getText());
+                    rootElement.appendChild(enabled);
+                    //Con MQ2Present
+                    Element mq2present = doc.createElement("MQ2Present");
+                    mq2present.setTextContent(txtMQ2present.getText());
+                    rootElement.appendChild(mq2present);
+                    //Con MQ2SensorNumberLPG
+                    Element mq2SensorLPG = doc.createElement("MQ2SensorLPG");
+                    mq2SensorLPG.setTextContent(txtMQ2LPG.getText());
+                    rootElement.appendChild(mq2SensorLPG);
+                    //Con MQ2SensorNumberCO
+                    Element mq2SensorCO = doc.createElement("MQ2SensorCO");
+                    mq2SensorCO.setTextContent(txtMQ2CO.getText());
+                    rootElement.appendChild(mq2SensorCO);
+                    //Con MQ2SensorNumberSMOKE
+                    Element mq2SensorSMOKE = doc.createElement("MQ2SensorSMOKE");
+                    mq2SensorSMOKE.setTextContent(txtMQ2SMOKE.getText());
+                    rootElement.appendChild(mq2SensorSMOKE);
+                    //Con MQ2SensorPort
+                    Element mq2SensorPort = doc.createElement("MQ2SensorPort");
+                    mq2SensorPort.setTextContent(txtSensorport.getText());
+                    rootElement.appendChild(mq2SensorPort);
+                    //Con MQ2BoardResistance
+                    Element mq2BoardResistance = doc.createElement("MQ2BoardResistance");
+                    mq2BoardResistance.setTextContent(txtBoardResistance.getText());
+                    rootElement.appendChild(mq2BoardResistance);
+                    //Con MQ2SensorResistance
+                    Element mq2SensorResistance = doc.createElement("MQ2SensorResistance");
+                    mq2SensorResistance.setTextContent(txtSensorResistance.getText());
+                    rootElement.appendChild(mq2SensorResistance);
+                    //Con MQ2Enabled
+                    Element mq2Enabled = doc.createElement("MQ2Enabled");
+                    mq2Enabled.setTextContent(txtMQ2Enabled.getText());
+                    rootElement.appendChild(mq2Enabled);
+
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    DOMSource source = new DOMSource(doc);
+                    StreamResult result = new StreamResult(new File(strRuta));
+
+                    transformer.transform(source, result);
+                    JOptionPane.showMessageDialog(null, "XML guardado en la ruta: " + strRuta, "Guardado", JOptionPane.INFORMATION_MESSAGE);
+
+                } catch (ParserConfigurationException ex) {
+                    Logger.getLogger(serverConnection.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (TransformerConfigurationException ex) {
+                    Logger.getLogger(serverConnection.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (TransformerException ex) {
+                    Logger.getLogger(serverConnection.class.getName()).log(Level.SEVERE, null, ex);
+                }     
+            }  
+        }
+    }//GEN-LAST:event_btnSaveReadingsActionPerformed
+
+    private void chkShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkShowPasswordActionPerformed
+        if(chkShowPassword.isSelected()){
+            txtPass.setEchoChar((char)0);
+        }
+        else{
+            txtPass.setEchoChar('*');
+        }
+    }//GEN-LAST:event_chkShowPasswordActionPerformed
+
+    private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
+        // Codigo para conectarse con servidor FTP
+        FTPClient client = new FTPClient();
+
+        String ftp = txtIP.getText(); // También puede ir la IP
+        String user = txtUser.getText();
+        String password = new String(txtPass.getPassword()); //Password encriptada
+
+        try {
+            // Conactando al servidor
+            client.connect(ftp);
+
+            // Logueado un usuario (true = pudo conectarse, false = no pudo
+                // conectarse)
+            boolean login = client.login(user, password);
+
+            // Cerrando sesión
+            client.logout();
+
+            // Desconectandose con el servidor
+            client.disconnect();
+
+            JOptionPane.showMessageDialog(null, "Conexión realizada con éxito");
+            JOptionPane.showMessageDialog(btnConnect, password);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(null, "No pudo conectarse con el servidor con los datos: IP = " + ftp + "; User = " + user + "; Pass = " + password);
+        }
+    }//GEN-LAST:event_btnConnectActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+
+        txtIP.setText("");
+        txtUser.setText("");
+        txtPass.setText("");
+        txtPassive.setText("");
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
+
+    private void txtIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIPActionPerformed
+
+    }//GEN-LAST:event_txtIPActionPerformed
+
+    
+    private void chkEnableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEnableActionPerformed
+        chkEnable.setEnabled(true);
+        chkEnable.addItemListener(new ItemListener() {
+        public void itemStateChanged(ItemEvent e) {
+
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                txtDuration.setEnabled(true);
+                txtIP.setEnabled(true);
+                txtPassive.setEnabled(true);
+                txtUser.setEnabled(true);
+                txtPass.setEnabled(true);
+                chkAnonimous.setEnabled(true);
+                chkShowPassword.setEnabled(true);
+                
+            }
+            else if(e.getStateChange() == ItemEvent.DESELECTED){
+                txtDuration.setEnabled(false);
+                txtIP.setEnabled(false);
+                txtPassive.setEnabled(false);
+                txtUser.setEnabled(false);
+                txtPass.setEnabled(false);
+                chkAnonimous.setEnabled(false);
+                chkShowPassword.setEnabled(false);
+            }
+
+        }
+    });
+    }//GEN-LAST:event_chkEnableActionPerformed
+
+    private void chkAnonimousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAnonimousActionPerformed
+        chkAnonimous.addItemListener(new ItemListener() {
+        public void itemStateChanged(ItemEvent e) {
+
+            if(e.getStateChange() == ItemEvent.SELECTED) {
+                
+                txtUser.setEnabled(false);
+                txtPass.setEnabled(false);
+                chkShowPassword.setEnabled(false);
+                
+            }
+            else if(e.getStateChange() == ItemEvent.DESELECTED){
+                
+                txtUser.setEnabled(true);
+                txtPass.setEnabled(true);
+                chkShowPassword.setEnabled(true);
+               
+            }
+
+        }
+    });
+    }//GEN-LAST:event_chkAnonimousActionPerformed
+
+    private void chkEnabledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEnabledActionPerformed
+        if (_preferences.getDHT22_Enabled()){
+            chkEnabled.setSelected(true);
+        }
+        else{
+            chkEnabled.setSelected(false);
+        }
+    }//GEN-LAST:event_chkEnabledActionPerformed
+
+    private void chkPresentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPresentActionPerformed
+        if (_preferences.getDHT22_Present()){
+            chkPresent.setSelected(true);
+        }
+        else{
+            chkPresent.setSelected(false);
+        }
+    }//GEN-LAST:event_chkPresentActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(mainSensors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(mainSensors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(mainSensors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(mainSensors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new mainSensors().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(mainSensors.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnConnect;
+    private javax.swing.JButton btnSaveReadings;
+    private javax.swing.JCheckBox chkAnonimous;
+    private javax.swing.JCheckBox chkEnable;
+    private javax.swing.JCheckBox chkEnabled;
+    private javax.swing.JCheckBox chkPresent;
+    private javax.swing.JCheckBox chkShowPassword;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.Label label1;
+    private java.awt.Label label2;
+    private javax.swing.JTextField txtBoardResistance;
+    private javax.swing.JTextField txtDuration;
+    private javax.swing.JTextField txtEnabled;
+    private javax.swing.JTextField txtHumidity;
+    private javax.swing.JTextField txtIP;
+    private javax.swing.JTextField txtMQ2CO;
+    private javax.swing.JTextField txtMQ2Enabled;
+    private javax.swing.JTextField txtMQ2LPG;
+    private javax.swing.JTextField txtMQ2SMOKE;
+    private javax.swing.JTextField txtMQ2present;
+    private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtPassive;
+    private javax.swing.JTextField txtPresent;
+    private javax.swing.JTextField txtSensor;
+    private javax.swing.JTextField txtSensorResistance;
+    private javax.swing.JTextField txtSensorport;
+    private javax.swing.JTextField txtTemperature;
+    private javax.swing.JTextField txtUser;
+    // End of variables declaration//GEN-END:variables
+
+ 
+}
