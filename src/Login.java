@@ -58,9 +58,6 @@ public class Login extends javax.swing.JFrame {
         jPanel_message = new javax.swing.JPanel();
         jLabel_close = new javax.swing.JLabel();
         jLabel_message_text = new javax.swing.JLabel();
-        jPanel_message_text = new javax.swing.JPanel();
-        jLabel_close1 = new javax.swing.JLabel();
-        jLabel_message_text1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -116,7 +113,6 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 250, 40));
 
         jPanLogin.setBackground(new java.awt.Color(240, 151, 57));
-        jPanLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanLoginMouseEntered(evt);
@@ -182,7 +178,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_messageLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel_message_text)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel_messageLayout.setVerticalGroup(
@@ -196,45 +192,7 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel_message, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jPanel_message_text.setBackground(new java.awt.Color(240, 52, 52));
-        jPanel_message_text.setPreferredSize(new java.awt.Dimension(200, 60));
-
-        jLabel_close1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel_close1.setText(" x");
-        jLabel_close1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel_close1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_close1MouseClicked(evt);
-            }
-        });
-
-        jLabel_message_text1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel_message_text1.setText("Message");
-
-        javax.swing.GroupLayout jPanel_message_textLayout = new javax.swing.GroupLayout(jPanel_message_text);
-        jPanel_message_text.setLayout(jPanel_message_textLayout);
-        jPanel_message_textLayout.setHorizontalGroup(
-            jPanel_message_textLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_message_textLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_message_text1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
-                .addComponent(jLabel_close1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel_message_textLayout.setVerticalGroup(
-            jPanel_message_textLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_message_textLayout.createSequentialGroup()
-                .addComponent(jLabel_close1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel_message_textLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel_message_text1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel_message_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 310, 0));
+        jPanel1.add(jPanel_message, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 290, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -293,10 +251,6 @@ public class Login extends javax.swing.JFrame {
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
         timerUp.start();
     }//GEN-LAST:event_jLabel_closeMouseClicked
-
-    private void jLabel_close1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_close1MouseClicked
-        timerUp.start();
-    }//GEN-LAST:event_jLabel_close1MouseClicked
 
     Timer timerUp = new Timer(10, new ActionListener() {
         @Override
@@ -372,14 +326,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_close;
-    private javax.swing.JLabel jLabel_close1;
     private javax.swing.JLabel jLabel_message_text;
-    private javax.swing.JLabel jLabel_message_text1;
     private javax.swing.JPanel jPanLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_message;
-    private javax.swing.JPanel jPanel_message_text;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
