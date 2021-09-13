@@ -289,6 +289,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
         txtBoardResistance = new javax.swing.JTextField();
         txtSensorport = new javax.swing.JTextField();
         btnSaveReadings = new javax.swing.JButton();
+        btnClose3 = new javax.swing.JButton();
         jPanel_sensors = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnClose1 = new javax.swing.JButton();
@@ -528,6 +529,13 @@ public class Dashboard_Form extends javax.swing.JFrame {
             }
         });
 
+        btnClose3.setText("Close");
+        btnClose3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_preferencesLayout = new javax.swing.GroupLayout(jPanel_preferences);
         jPanel_preferences.setLayout(jPanel_preferencesLayout);
         jPanel_preferencesLayout.setHorizontalGroup(
@@ -599,6 +607,10 @@ public class Dashboard_Form extends javax.swing.JFrame {
                                     .addComponent(txtHumidity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel12))
                         .addGap(200, 200, 200))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_preferencesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose3)
+                .addContainerGap())
         );
         jPanel_preferencesLayout.setVerticalGroup(
             jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -652,7 +664,9 @@ public class Dashboard_Form extends javax.swing.JFrame {
                     .addComponent(txtMQ2Enabled, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSaveReadings)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(btnClose3)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jPanel_sensors.setBackground(new java.awt.Color(255, 255, 255));
@@ -889,48 +903,48 @@ public class Dashboard_Form extends javax.swing.JFrame {
             .addGroup(jPanel_serverLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkEnable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(txtPassive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chkAnonimous)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel_serverLayout.createSequentialGroup()
-                        .addGap(381, 381, 381)
-                        .addComponent(btnClose)
-                        .addGap(20, 20, 20))
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel27)
+                        .addGap(27, 27, 27))
                     .addGroup(jPanel_serverLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chkEnable)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25)
-                            .addComponent(txtPassive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkAnonimous)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel_serverLayout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel27)
-                                .addGap(27, 27, 27))
-                            .addGroup(jPanel_serverLayout.createSequentialGroup()
-                                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(chkShowPassword))
-                                .addGap(28, 28, 28)))
-                        .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel28)
-                            .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkShowPassword))
+                        .addGap(28, 28, 28)))
+                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_serverLayout.createSequentialGroup()
+                        .addGap(109, 109, 109)
                         .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnClear)
                             .addComponent(btnConnect))
-                        .addGap(35, 35, 35))))
+                        .addGap(35, 35, 35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_serverLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnClose)
+                        .addGap(19, 19, 19))))
         );
 
         jPanel_read.setBackground(new java.awt.Color(255, 255, 255));
@@ -1221,15 +1235,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
        _preferences.setDHT22_Present(Boolean.parseBoolean(txtPresent.getText()));
        _preferences.setDHT22_Enabled(Boolean.parseBoolean(txtEnabled.getText()));
         
-          
-       Boolean isSelected = chkPresent.isSelected();
-       
-//       if(isSelected){
-//           chkPresent.setSelected(_preferences.setDHT22_Enabled());
-//       } else {
-//           chkPresent.setSelected(_preferences.setDHT22_Enabled(Boolean.getBoolean(isSelected)));
-//       }
-       
        
         try {
             _preferences.Save();
@@ -1473,6 +1478,10 @@ public class Dashboard_Form extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnClose1ActionPerformed
 
+    private void btnClose3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose3ActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnClose3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1513,6 +1522,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnClose1;
     private javax.swing.JButton btnClose2;
+    private javax.swing.JButton btnClose3;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnSaveReadings;
     private javax.swing.JCheckBox chkAnonimous;
