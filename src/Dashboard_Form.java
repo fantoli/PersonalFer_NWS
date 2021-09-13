@@ -332,6 +332,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jLabel19.setText("jLabel19");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 1068));
@@ -562,12 +563,9 @@ public class Dashboard_Form extends javax.swing.JFrame {
                             .addComponent(txtSensor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(63, 63, 63)
                         .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_preferencesLayout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(201, 201, 201))
-                            .addGroup(jPanel_preferencesLayout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(201, 201, 201))))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(201, 201, 201))
                     .addGroup(jPanel_preferencesLayout.createSequentialGroup()
                         .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1448,6 +1446,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
                     StreamResult result = new StreamResult(new File(strRuta));
 
                     transformer.transform(source, result);
+                    
                     JOptionPane.showMessageDialog(null, "XML guardado en la ruta: " + strRuta, "Guardado", JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (ParserConfigurationException ex) {

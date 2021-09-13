@@ -63,25 +63,31 @@ public class Login_Form extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel_title.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel_title.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel_title.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 36)); // NOI18N
         jLabel_title.setForeground(new java.awt.Color(214, 69, 65));
         jLabel_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel_title.setText("LOGIN");
         jLabel_title.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jLabel_user.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel_user.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18)); // NOI18N
         jLabel_user.setText("User");
 
-        jLabel_password.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel_password.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 18)); // NOI18N
         jLabel_password.setText("Password");
 
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLogin.setText("Login");
+        btnLogin.setBorder(null);
+        btnLogin.setBorderPainted(false);
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
 
+        jCheckBox_showpass.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 12)); // NOI18N
         jCheckBox_showpass.setText("Show pass");
         jCheckBox_showpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +114,7 @@ public class Login_Form extends javax.swing.JFrame {
             }
         });
 
+        jLabel_message_text.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel_message_text.setText("Message");
 
         javax.swing.GroupLayout jPanel_messageLayout = new javax.swing.GroupLayout(jPanel_message);
@@ -117,7 +124,7 @@ public class Login_Form extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_messageLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel_message_text)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel_messageLayout.setVerticalGroup(
@@ -156,13 +163,13 @@ public class Login_Form extends javax.swing.JFrame {
                                 .addComponent(jCheckBox_showpass))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(156, 156, 156)
-                                .addComponent(jPanel_message, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel_message, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(165, 165, 165)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
