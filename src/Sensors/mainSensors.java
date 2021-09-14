@@ -41,11 +41,9 @@ public class mainSensors extends javax.swing.JFrame {
     /**
      * Creates new form mainSensors
      */
-    
        
-        Factory Factory = new Factory();
-       
-        clsPreferences _preferences = Factory.GetPreferences();
+    Factory Factory = new Factory();
+    clsPreferences _preferences = Factory.GetPreferences();
     
    
     public mainSensors() throws Exception {
@@ -95,12 +93,6 @@ public class mainSensors extends javax.swing.JFrame {
     
     public void SavePreferences() throws Exception{
         
-       clsPreferences _preferences; 
-        
-       Factory Factory;
-       Factory = new Factory();
-       
-       _preferences = Factory.GetPreferences();
        
        _preferences.setDHT22_SensorNumber_Temperature(Integer.parseInt(txtTemperature.getText()));
        _preferences.setDHT22_SensorNumber_Humidity(Integer.parseInt(txtHumidity.getText()));
@@ -190,7 +182,6 @@ public class mainSensors extends javax.swing.JFrame {
         txtSensorResistance = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         txtMQ2Enabled = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -472,8 +463,6 @@ public class mainSensors extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setText("MQ2 Enabled:");
 
-        jLabel21.setText("ADRIAN RULES");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -548,17 +537,11 @@ public class mainSensors extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel21)
-                .addGap(293, 293, 293))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel21)
-                .addGap(2, 2, 2)
+                .addGap(24, 24, 24)
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1076,7 +1059,6 @@ public class mainSensors extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
