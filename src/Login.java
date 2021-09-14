@@ -168,7 +168,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel_message_text.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel_message_text.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel_message_text.setText("Message");
 
         javax.swing.GroupLayout jPanel_messageLayout = new javax.swing.GroupLayout(jPanel_message);
@@ -178,7 +178,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_messageLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel_message_text)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
                 .addComponent(jLabel_close, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel_messageLayout.setVerticalGroup(

@@ -1166,26 +1166,33 @@ public class Dashboard_Form extends javax.swing.JFrame {
         String ftp = txtIP.getText(); // También puede ir la IP
         String user = txtUser.getText();
         String password = new String(txtPass.getPassword()); //Password encriptada
-
-        try {
-            // Conactando al servidor
-            client.connect(ftp);
-
-            // Logueado un usuario (true = pudo conectarse, false = no pudo
+            try {
+                // Conactando al servidor
+                client.connect(ftp);
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Dashboard_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            try {
+                // Logueado un usuario (true = pudo conectarse, false = no pudo
                 // conectarse)
-            boolean login = client.login(user, password);
-
-            // Cerrando sesión
-            client.logout();
-
-            // Desconectandose con el servidor
-            client.disconnect();
-
-            JOptionPane.showMessageDialog(null, "Conexión realizada con éxito");
-            JOptionPane.showMessageDialog(btnConnect, password);
-        } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "No pudo conectarse con el servidor con los datos: IP = " + ftp + "; User = " + user + "; Pass = " + password);
-        }
+                boolean login = client.login(user, password);
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Dashboard_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            try {
+                // Cerrando sesión
+                client.logout();
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Dashboard_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+            try {
+                // Desconectandose con el servidor
+                client.disconnect();
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Dashboard_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        JOptionPane.showMessageDialog(null, "Conexión realizada con éxito");
+        JOptionPane.showMessageDialog(btnConnect, password);
     }//GEN-LAST:event_btnConnectActionPerformed
 
     private void txtSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSensorActionPerformed
