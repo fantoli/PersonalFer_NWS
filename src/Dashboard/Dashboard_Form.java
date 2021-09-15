@@ -1,3 +1,5 @@
+package Dashboard;
+
 
 import Sensors.mainSensors;
 import java.awt.Color;
@@ -109,17 +111,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jLabel_menuPreferences.setForeground(Color.black);
         
         addActionToMenuLabels();
-        
-        
-        if (_preferences.getDHT22_Enabled()){
-           _preferences.setDHT22_Enabled(false);
-           System.out.println(_preferences.getDHT22_Enabled());
-        }
-        else{
-           _preferences.setDHT22_Enabled(true);
-           System.out.println(_preferences.getDHT22_Enabled());
-        }
-        
+              
         
         try {
             this.txtPresent.setText(String.valueOf(_preferences.getDHT22_Present()));
@@ -138,6 +130,15 @@ public class Dashboard_Form extends javax.swing.JFrame {
             this.txtMQ2Enabled.setText(String.valueOf(_preferences.getMQ2_Enabled()));
             this.txtEnabled.setText(String.valueOf(_preferences.getDHT22_Enabled()));
             
+            
+            if (_preferences.getDHT22_Present()){
+            chkPresent.setSelected(true);
+            txtPresent.setText(String.valueOf("true"));
+            }
+            else{
+                chkPresent.setSelected(false);
+                txtPresent.setText(String.valueOf("false"));
+            }
    
            
         } catch (Exception e) {
@@ -1200,11 +1201,11 @@ public class Dashboard_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSensorActionPerformed
 
     private void chkPresentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPresentActionPerformed
-        if (_preferences.getDHT22_Present()){
-            chkPresent.setSelected(true);
+        if(_preferences.getDHT22_Present()){
+            txtPresent.setText("true");
         }
         else{
-            chkPresent.setSelected(false);
+            txtPresent.setText("false");
         }
     }//GEN-LAST:event_chkPresentActionPerformed
 
