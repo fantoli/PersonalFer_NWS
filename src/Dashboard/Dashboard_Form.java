@@ -69,6 +69,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard_Form
      */
+    String prueba;
     
         Factory Factory = new Factory();
        
@@ -466,7 +467,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
         });
 
         chkPresent.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        chkPresent.setText("present");
         chkPresent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkPresentActionPerformed(evt);
