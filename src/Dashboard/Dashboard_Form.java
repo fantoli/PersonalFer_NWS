@@ -69,10 +69,8 @@ public class Dashboard_Form extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard_Form
      */
-    String prueba;
     
-        Factory Factory = new Factory();
-       
+        Factory Factory = new Factory();       
         clsPreferences _preferences = Factory.GetPreferences();
     
      //default border for menu items
@@ -116,7 +114,39 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jLabel_menuPreferences.setForeground(Color.black);
         
         addActionToMenuLabels();
-              
+        
+        if (_preferences.getDHT22_Present()){
+            chkPresent.setSelected(true);
+        }
+        else{
+            chkPresent.setSelected(false);
+        }
+        
+        if (_preferences.getDHT22_Enabled()){
+           chkEnabled.setSelected(true);
+           
+        }
+        else{
+           chkEnabled.setSelected(true);
+           
+        }
+        
+        if(_preferences.getMQ2_Present()){
+            chkMQ2Present.setSelected(true);
+        }
+        else{
+            chkMQ2Present.setSelected(false);
+        }
+        
+        if(_preferences.getMQ2_Enabled()){
+            chkMQ2Enabled.setSelected(true);
+            
+        }
+        else{
+            chkMQ2Enabled.setSelected(false);
+            
+        }
+        
         
         try {
             this.txtPresent.setText(String.valueOf(_preferences.getDHT22_Present()));
@@ -135,16 +165,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
             this.txtMQ2Enabled.setText(String.valueOf(_preferences.getMQ2_Enabled()));
             this.txtEnabled.setText(String.valueOf(_preferences.getDHT22_Enabled()));
             
-            this.txtIP.setText("10.0.2.15");
-            
-             if (_preferences.getDHT22_Enabled()){
-                _preferences.setDHT22_Enabled(false);
-                
-             }
-             else{
-                _preferences.setDHT22_Enabled(true);
-                
-             }
    
            
         } catch (Exception e) {
@@ -154,6 +174,31 @@ public class Dashboard_Form extends javax.swing.JFrame {
         
         
         this.setLocationRelativeTo(null);
+    }
+    
+    public void SavePreferences(){
+        
+        try {
+            _preferences.setDHT22_Enabled(Boolean.parseBoolean(txtEnabled.getText()));
+            _preferences.setDHT22_Present(Boolean.parseBoolean(txtPresent.getText()));
+            _preferences.setDHT22_SensorPin(Integer.parseInt(txtSensor.getText()));
+            _preferences.setDHT22_SensorNumber_Temperature(Integer.parseInt(txtTemperature.getText()));
+            _preferences.setDHT22_SensorNumber_Humidity(Integer.parseInt(txtHumidity.getText()));
+            _preferences.setMQ2_SensorNumber_LPG(Integer.parseInt(txtMQ2LPG.getText()));
+            _preferences.setMQ2_SensorNumber_CO(Integer.parseInt(txtMQ2CO.getText()));
+            _preferences.setMQ2_SensorNumber_SMOKE(Integer.parseInt(txtMQ2SMOKE.getText()));
+            _preferences.setMQ2_SensorPort(txtSensorport.getText());
+            _preferences.setMQ2_BoardResistance(Integer.parseInt(txtBoardResistance.getText()));
+            _preferences.setMQ2_SensorResistance(Double.parseDouble(txtSensorResistance.getText()));
+            _preferences.setReadTimePeriod(Integer.parseInt(txtDuration.getText()));
+            _preferences.setMQ2_Enabled(Boolean.parseBoolean(txtMQ2Enabled.getText()));
+            _preferences.setMQ2_Present(Boolean.parseBoolean(txtMQ2present.getText()));
+            _preferences.Save();
+             
+        } catch (Exception e) {
+            java.util.logging.Logger.getLogger(mainSensors.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+            JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), this.getTitle(), JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public void setLabelBackground(JLabel label) 
@@ -255,6 +300,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel19 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         jPanel_menu = new javax.swing.JPanel();
         jPanel_logoANDname = new javax.swing.JPanel();
@@ -265,7 +311,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel_menuSensors = new javax.swing.JLabel();
         jPanel_preferences = new javax.swing.JPanel();
-        label2 = new java.awt.Label();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -297,6 +342,9 @@ public class Dashboard_Form extends javax.swing.JFrame {
         txtSensorport = new javax.swing.JTextField();
         btnSaveReadings = new javax.swing.JButton();
         btnClose3 = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
+        chkMQ2Present = new javax.swing.JCheckBox();
+        chkMQ2Enabled = new javax.swing.JCheckBox();
         jPanel_sensors = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnClose1 = new javax.swing.JButton();
@@ -337,6 +385,8 @@ public class Dashboard_Form extends javax.swing.JFrame {
         btnClose2 = new javax.swing.JButton();
 
         jLabel19.setText("jLabel19");
+
+        jCheckBox2.setText("jCheckBox2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -447,10 +497,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
 
         jPanel_preferences.setBackground(new java.awt.Color(255, 255, 255));
 
-        label2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        label2.setForeground(new java.awt.Color(0, 0, 0));
-        label2.setText("Sensor propieties");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Sensor Pin:");
 
@@ -459,6 +505,12 @@ public class Dashboard_Form extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Enabled:");
+
+        txtEnabled.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEnabledActionPerformed(evt);
+            }
+        });
 
         txtSensor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -474,7 +526,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
         });
 
         chkEnabled.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        chkEnabled.setText("enabled");
         chkEnabled.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkEnabledActionPerformed(evt);
@@ -543,6 +594,23 @@ public class Dashboard_Form extends javax.swing.JFrame {
             }
         });
 
+        jLabel35.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel35.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel35.setText("DHT22 propierties");
+
+        chkMQ2Present.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkMQ2PresentActionPerformed(evt);
+            }
+        });
+
+        chkMQ2Enabled.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkMQ2EnabledActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_preferencesLayout = new javax.swing.GroupLayout(jPanel_preferences);
         jPanel_preferences.setLayout(jPanel_preferencesLayout);
         jPanel_preferencesLayout.setHorizontalGroup(
@@ -551,77 +619,93 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 .addGap(108, 108, 108)
                 .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_preferencesLayout.createSequentialGroup()
-                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_preferencesLayout.createSequentialGroup()
-                                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPresent, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(chkPresent)
-                                    .addComponent(chkEnabled)))
-                            .addComponent(txtSensor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
-                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(201, 201, 201))
+                        .addComponent(jLabel35)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel_preferencesLayout.createSequentialGroup()
                         .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel_preferencesLayout.createSequentialGroup()
                                 .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel18)
-                                    .addComponent(jLabel29)
-                                    .addComponent(jLabel30))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel11))
+                                .addGap(32, 32, 32)
                                 .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMQ2present, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtMQ2LPG)
-                                        .addComponent(txtMQ2CO, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtMQ2SMOKE, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(56, 56, 56)
-                                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_preferencesLayout.createSequentialGroup()
-                                        .addComponent(jLabel32)
-                                        .addGap(10, 10, 10))
                                     .addGroup(jPanel_preferencesLayout.createSequentialGroup()
                                         .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel33)
-                                            .addComponent(jLabel31)
-                                            .addComponent(jLabel34))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtSensorport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtBoardResistance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtSensorResistance)
-                                        .addComponent(txtMQ2Enabled, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_preferencesLayout.createSequentialGroup()
-                                        .addGap(15, 15, 15)
-                                        .addComponent(btnSaveReadings))
-                                    .addComponent(txtTemperature, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtHumidity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel12))
-                        .addGap(200, 200, 200))))
+                                            .addComponent(txtEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPresent, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(chkPresent)
+                                            .addComponent(chkEnabled)))
+                                    .addComponent(txtSensor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(63, 63, 63)
+                                .addComponent(jLabel7))
+                            .addComponent(jLabel12)
+                            .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                                    .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_preferencesLayout.createSequentialGroup()
+                                            .addComponent(jLabel32)
+                                            .addGap(10, 10, 10))
+                                        .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                                            .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel33)
+                                                .addComponent(jLabel31))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                    .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtSensorport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtBoardResistance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtSensorResistance, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                                    .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                                            .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                                                        .addComponent(jLabel13)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(chkMQ2Present))
+                                                    .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                                                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabel18)
+                                                            .addComponent(jLabel29)
+                                                            .addComponent(jLabel30))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(txtMQ2present, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                .addComponent(txtMQ2LPG)
+                                                                .addComponent(txtMQ2CO, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                            .addComponent(txtMQ2SMOKE, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(txtMQ2Enabled, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                                                    .addComponent(jLabel34)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(chkMQ2Enabled)
+                                                    .addGap(175, 175, 175)))
+                                            .addGap(209, 209, 209))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_preferencesLayout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addGap(71, 71, 71)))
+                                    .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtTemperature, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtHumidity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_preferencesLayout.createSequentialGroup()
+                                            .addGap(17, 17, 17)
+                                            .addComponent(btnSaveReadings))))))
+                        .addContainerGap(201, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_preferencesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnClose3)
-                .addContainerGap())
+                .addGap(26, 26, 26))
         );
         jPanel_preferencesLayout.setVerticalGroup(
             jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_preferencesLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(98, 98, 98)
+                .addComponent(jLabel35)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
@@ -642,35 +726,47 @@ public class Dashboard_Form extends javax.swing.JFrame {
                         .addComponent(chkEnabled)))
                 .addGap(21, 21, 21)
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtMQ2present, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31)
-                    .addComponent(txtSensorport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(txtMQ2LPG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32)
-                    .addComponent(txtBoardResistance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtMQ2Enabled, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                                .addComponent(jLabel34)
+                                .addGap(3, 3, 3))
+                            .addComponent(chkMQ2Enabled, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(txtMQ2present, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkMQ2Present, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(txtMQ2LPG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel31)
+                            .addComponent(txtSensorport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel32)
+                            .addComponent(txtBoardResistance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel33)
+                            .addComponent(txtSensorResistance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMQ2CO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel33)
-                    .addComponent(txtSensorResistance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
                     .addComponent(txtMQ2SMOKE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel34)
-                    .addComponent(txtMQ2Enabled, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSaveReadings)
-                .addGap(45, 45, 45)
+                    .addComponent(btnSaveReadings))
+                .addGap(12, 12, 12)
                 .addComponent(btnClose3)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel_sensors.setBackground(new java.awt.Color(255, 255, 255));
@@ -870,7 +966,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
             .addGroup(jPanel_serverLayout.createSequentialGroup()
                 .addGap(349, 349, 349)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 384, Short.MAX_VALUE))
+                .addGap(0, 383, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_serverLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -905,7 +1001,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jPanel_serverLayout.setVerticalGroup(
             jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_serverLayout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -923,11 +1019,11 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 .addComponent(chkAnonimous)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_serverLayout.createSequentialGroup()
+                    .addGroup(jPanel_serverLayout.createSequentialGroup()
                         .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel27)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addGap(27, 27, 27))
                     .addGroup(jPanel_serverLayout.createSequentialGroup()
                         .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1070,9 +1166,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1170,7 +1264,8 @@ public class Dashboard_Form extends javax.swing.JFrame {
         String server = txtIP.getText();
         int port = 21;
         String user = txtUser.getText();
-        String pass = new String(txtPass.getPassword());
+        String pass = new String(txtPass.getPassword());        
+       
  
         FTPClient ftpClient = new FTPClient();
         try {
@@ -1228,7 +1323,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
-        
     }//GEN-LAST:event_btnConnectActionPerformed
 
     private void txtSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSensorActionPerformed
@@ -1237,19 +1331,31 @@ public class Dashboard_Form extends javax.swing.JFrame {
 
     private void chkPresentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPresentActionPerformed
         if(_preferences.getDHT22_Present()){
-            txtPresent.setText("true");
+            _preferences.setDHT22_Present(false);
+            chkPresent.setSelected(false);
+            txtPresent.setText("false");
         }
         else{
-            txtPresent.setText("false");
+            _preferences.setDHT22_Present(true);
+            chkPresent.setSelected(true);
+            txtPresent.setText("true");
         }
     }//GEN-LAST:event_chkPresentActionPerformed
 
     private void chkEnabledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEnabledActionPerformed
         if (_preferences.getDHT22_Enabled()){
-            chkEnabled.setSelected(true);
+            _preferences.setDHT22_Enabled(false);
+            chkEnabled.setSelected(false);
+            txtEnabled.setText("false");
+            txtTemperature.setEnabled(false);
+            txtHumidity.setEnabled(false);
         }
         else{
-            chkEnabled.setSelected(false);
+            _preferences.setDHT22_Enabled(true);
+            chkEnabled.setSelected(true);
+            txtEnabled.setText("true");
+            txtTemperature.setEnabled(true);
+            txtHumidity.setEnabled(true);
         }
     }//GEN-LAST:event_chkEnabledActionPerformed
 
@@ -1261,34 +1367,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHumidityActionPerformed
 
-    public void SavePreferences() throws Exception{
-        
-       clsPreferences _preferences; 
-        
-       Factory Factory;
-       Factory = new Factory();
-       
-       _preferences = Factory.GetPreferences();
-       
-       _preferences.setDHT22_SensorNumber_Temperature(Integer.parseInt(txtTemperature.getText()));
-       _preferences.setDHT22_SensorNumber_Humidity(Integer.parseInt(txtHumidity.getText()));
-       _preferences.setDHT22_SensorPin(Integer.parseInt(txtSensor.getText()));
-       _preferences.setDHT22_Present(Boolean.parseBoolean(txtPresent.getText()));
-       _preferences.setDHT22_Enabled(Boolean.parseBoolean(txtEnabled.getText()));
-       _preferences.setMQ2_SensorResistance(Double.parseDouble(txtSensorResistance.getText()));
-        
-       
-        try {
-            _preferences.Save();
-        } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(mainSensors.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-        System.out.println(_preferences.getDHT22_SensorNumber_Temperature());
-        
-    }
-    
-    
     private void btnSaveReadingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveReadingsActionPerformed
         try {
             SavePreferences();
@@ -1502,6 +1580,8 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 }
             }
         }
+        
+        SavePreferences();
     }//GEN-LAST:event_btnSaveReadingsActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -1524,6 +1604,46 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private void btnClose3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose3ActionPerformed
         dispose();
     }//GEN-LAST:event_btnClose3ActionPerformed
+
+    private void txtEnabledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnabledActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEnabledActionPerformed
+
+    private void chkMQ2PresentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMQ2PresentActionPerformed
+        if(_preferences.getMQ2_Present()){
+            _preferences.setMQ2_Present(false);
+            chkMQ2Present.setSelected(false);
+            txtMQ2present.setText("false");
+        }
+        else{
+            _preferences.setMQ2_Present(true);
+            chkMQ2Present.setSelected(true);
+            txtMQ2present.setText("true");
+        }
+    }//GEN-LAST:event_chkMQ2PresentActionPerformed
+
+    private void chkMQ2EnabledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkMQ2EnabledActionPerformed
+        if(_preferences.getMQ2_Enabled()){
+            _preferences.setMQ2_Enabled(false);
+            txtMQ2Enabled.setText("false");
+            txtMQ2LPG.setEnabled(false);
+            txtMQ2CO.setEnabled(false);
+            txtMQ2SMOKE.setEnabled(false);
+            txtSensorport.setEnabled(false);
+            txtBoardResistance.setEnabled(false);
+            txtSensorResistance.setEnabled(false);
+        }
+        else{
+            _preferences.setMQ2_Enabled(true);
+            txtMQ2Enabled.setText("true");
+            txtMQ2LPG.setEnabled(true);
+            txtMQ2CO.setEnabled(true);
+            txtMQ2SMOKE.setEnabled(true);
+            txtSensorport.setEnabled(true);
+            txtBoardResistance.setEnabled(true);
+            txtSensorResistance.setEnabled(true);
+        }
+    }//GEN-LAST:event_chkMQ2EnabledActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1571,8 +1691,11 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkAnonimous;
     private javax.swing.JCheckBox chkEnable;
     private javax.swing.JCheckBox chkEnabled;
+    private javax.swing.JCheckBox chkMQ2Enabled;
+    private javax.swing.JCheckBox chkMQ2Present;
     private javax.swing.JCheckBox chkPresent;
     private javax.swing.JCheckBox chkShowPassword;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1601,6 +1724,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1623,7 +1747,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private java.awt.Label label1;
-    private java.awt.Label label2;
     private javax.swing.JTextField txtBoardResistance;
     private javax.swing.JTextField txtDuration;
     private javax.swing.JTextField txtEnabled;
