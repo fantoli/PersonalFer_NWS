@@ -24,8 +24,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -49,6 +52,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import nwstcrpi.clsPreferences;
 import nwstcrpi.Factory;
+import org.apache.commons.net.ftp.FTP;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -124,21 +128,22 @@ public class Dashboard_Form extends javax.swing.JFrame {
             this.txtMQ2CO.setText(String.valueOf(_preferences.getMQ2_SensorNumber_CO()));
             this.txtMQ2SMOKE.setText(String.valueOf(_preferences.getMQ2_SensorNumber_SMOKE()));
             this.txtSensorport.setText(String.valueOf(_preferences.getMQ2_SensorPort()));
-            this.txtBoardResistance.setText(String.valueOf(_preferences.getMQ2_SensorResistance()));
+            this.txtBoardResistance.setText(String.valueOf(_preferences.getMQ2_BoardResistance()));
             this.txtSensorResistance.setText(String.valueOf(_preferences.getMQ2_SensorResistance()));
             
             this.txtMQ2Enabled.setText(String.valueOf(_preferences.getMQ2_Enabled()));
             this.txtEnabled.setText(String.valueOf(_preferences.getDHT22_Enabled()));
             
+            this.txtIP.setText("10.0.2.15");
             
-            if (_preferences.getDHT22_Present()){
-            chkPresent.setSelected(true);
-            txtPresent.setText(String.valueOf("true"));
-            }
-            else{
-                chkPresent.setSelected(false);
-                txtPresent.setText(String.valueOf("false"));
-            }
+             if (_preferences.getDHT22_Enabled()){
+                _preferences.setDHT22_Enabled(false);
+                
+             }
+             else{
+                _preferences.setDHT22_Enabled(true);
+                
+             }
    
            
         } catch (Exception e) {
@@ -865,7 +870,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
             .addGroup(jPanel_serverLayout.createSequentialGroup()
                 .addGap(349, 349, 349)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 383, Short.MAX_VALUE))
+                .addGap(0, 384, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_serverLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -900,7 +905,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jPanel_serverLayout.setVerticalGroup(
             jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_serverLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -918,11 +923,11 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 .addComponent(chkAnonimous)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel_serverLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_serverLayout.createSequentialGroup()
                         .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel27)
-                        .addGap(27, 27, 27))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel_serverLayout.createSequentialGroup()
                         .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1162,38 +1167,68 @@ public class Dashboard_Form extends javax.swing.JFrame {
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         // Codigo para conectarse con servidor FTP
-        FTPClient client = new FTPClient();
-
-        String ftp = txtIP.getText(); // También puede ir la IP
+        String server = txtIP.getText();
+        int port = 21;
         String user = txtUser.getText();
-        String password = new String(txtPass.getPassword()); //Password encriptada
-            try {
-                // Conactando al servidor
-                client.connect(ftp);
-            } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(Dashboard_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        String pass = new String(txtPass.getPassword());
+ 
+        FTPClient ftpClient = new FTPClient();
+        try {
+ 
+            ftpClient.connect(server, port);
+            ftpClient.login(user, pass);
+            ftpClient.enterLocalPassiveMode();
+ 
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+ 
+            // APPROACH #1: uploads first file using an InputStream
+            File firstLocalFile = new File("C:\\Users\\fantoli\\results\\Settings_results.xml");
+ 
+            String firstRemoteFile = "Settings_results.xml";
+            InputStream inputStream = new FileInputStream(firstLocalFile);
+ 
+            System.out.println("Start uploading first file");
+            boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
+            inputStream.close();
+            if (done) {
+                System.out.println("The first file is uploaded successfully.");
             }
-            try {
-                // Logueado un usuario (true = pudo conectarse, false = no pudo
-                // conectarse)
-                boolean login = client.login(user, password);
-            } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(Dashboard_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+ 
+            // APPROACH #2: uploads second file using an OutputStream
+            File secondLocalFile = new File("C:\\Users\\fantoli\\results\\prueba.txt");
+            String secondRemoteFile = "prueba.txt";
+            inputStream = new FileInputStream(secondLocalFile);
+ 
+            System.out.println("Start uploading second file");
+            OutputStream outputStream = ftpClient.storeFileStream(secondRemoteFile);
+            byte[] bytesIn = new byte[4096];
+            int read = 0;
+ 
+            while ((read = inputStream.read(bytesIn)) != -1) {
+                outputStream.write(bytesIn, 0, read);
             }
-            try {
-                // Cerrando sesión
-                client.logout();
-            } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(Dashboard_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            inputStream.close();
+            outputStream.close();
+ 
+            boolean completed = ftpClient.completePendingCommand();
+            if (completed) {
+                System.out.println("The second file is uploaded successfully.");
             }
+ 
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
             try {
-                // Desconectandose con el servidor
-                client.disconnect();
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
             } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(Dashboard_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
-        JOptionPane.showMessageDialog(null, "Conexión realizada con éxito");
-        JOptionPane.showMessageDialog(btnConnect, password);
+        }
+        
     }//GEN-LAST:event_btnConnectActionPerformed
 
     private void txtSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSensorActionPerformed
@@ -1240,6 +1275,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
        _preferences.setDHT22_SensorPin(Integer.parseInt(txtSensor.getText()));
        _preferences.setDHT22_Present(Boolean.parseBoolean(txtPresent.getText()));
        _preferences.setDHT22_Enabled(Boolean.parseBoolean(txtEnabled.getText()));
+       _preferences.setMQ2_SensorResistance(Double.parseDouble(txtSensorResistance.getText()));
         
        
         try {

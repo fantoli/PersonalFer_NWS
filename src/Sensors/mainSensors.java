@@ -71,7 +71,7 @@ public class mainSensors extends javax.swing.JFrame {
             this.txtMQ2CO.setText(String.valueOf(_preferences.getMQ2_SensorNumber_CO()));
             this.txtMQ2SMOKE.setText(String.valueOf(_preferences.getMQ2_SensorNumber_SMOKE()));
             this.txtSensorport.setText(String.valueOf(_preferences.getMQ2_SensorPort()));
-            this.txtBoardResistance.setText(String.valueOf(_preferences.getMQ2_SensorResistance()));
+            this.txtBoardResistance.setText(String.valueOf(_preferences.getMQ2_BoardResistance()));
             this.txtSensorResistance.setText(String.valueOf(_preferences.getMQ2_SensorResistance()));
             
             this.txtMQ2Enabled.setText(String.valueOf(_preferences.getMQ2_Enabled()));
