@@ -1023,19 +1023,15 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chkAnonimous)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel_serverLayout.createSequentialGroup()
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel27)
-                        .addGap(27, 27, 27))
-                    .addGroup(jPanel_serverLayout.createSequentialGroup()
-                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chkShowPassword))
-                        .addGap(28, 28, 28)))
+                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkShowPassword)
+                    .addComponent(jLabel27))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
                     .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1267,7 +1263,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         // Codigo para conectarse con servidor FTP
         String server = txtIP.getText();
-        int port = 21;
+        int port = 22;
         String user = txtUser.getText();
         String pass = new String(txtPass.getPassword());        
        
@@ -1281,8 +1277,9 @@ public class Dashboard_Form extends javax.swing.JFrame {
  
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
  
+            String username = System.getProperty("user.name");
             // APPROACH #1: uploads first file using an InputStream
-            File firstLocalFile = new File("C:\\Users\\fantoli\\results\\Settings_results.xml");
+            File firstLocalFile = new File("C:\\Users\\" + username + "\\results\\Settings_results.xml");
  
             String firstRemoteFile = "Settings_results.xml";
             InputStream inputStream = new FileInputStream(firstLocalFile);
@@ -1295,7 +1292,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
             }
  
             // APPROACH #2: uploads second file using an OutputStream
-            File secondLocalFile = new File("C:\\Users\\fantoli\\results\\prueba.txt");
+            File secondLocalFile = new File("C:\\Users\\" + username + "\\results\\prueba.txt");
             String secondRemoteFile = "prueba.txt";
             inputStream = new FileInputStream(secondLocalFile);
  
