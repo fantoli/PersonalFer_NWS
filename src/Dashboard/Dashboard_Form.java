@@ -374,6 +374,8 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         btnClear = new javax.swing.JButton();
         btnConnect = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtPort = new javax.swing.JTextField();
         jPanel_read = new javax.swing.JPanel();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
@@ -623,24 +625,6 @@ public class Dashboard_Form extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel_preferencesLayout.createSequentialGroup()
                         .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_preferencesLayout.createSequentialGroup()
-                                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel11))
-                                .addGap(32, 32, 32)
-                                .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel_preferencesLayout.createSequentialGroup()
-                                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtPresent, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(chkPresent)
-                                            .addComponent(chkEnabled)))
-                                    .addComponent(txtSensor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(63, 63, 63)
-                                .addComponent(jLabel7))
                             .addComponent(jLabel12)
                             .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel_preferencesLayout.createSequentialGroup()
@@ -685,8 +669,26 @@ public class Dashboard_Form extends javax.swing.JFrame {
                                                     .addGap(175, 175, 175)))
                                             .addGap(209, 209, 209))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_preferencesLayout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addGap(71, 71, 71)))
+                                            .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel3)
+                                                .addComponent(jLabel9)
+                                                .addComponent(jLabel11))
+                                            .addGap(32, 32, 32)
+                                            .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel_preferencesLayout.createSequentialGroup()
+                                                    .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(txtEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(txtPresent, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(chkPresent)
+                                                        .addComponent(chkEnabled)))
+                                                .addComponent(txtSensor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(137, 137, 137)
+                                            .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel7)
+                                                .addComponent(jLabel8))
+                                            .addGap(48, 48, 48)))
                                     .addGroup(jPanel_preferencesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(txtTemperature, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtHumidity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -956,6 +958,9 @@ public class Dashboard_Form extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Port");
+
         javax.swing.GroupLayout jPanel_serverLayout = new javax.swing.GroupLayout(jPanel_server);
         jPanel_server.setLayout(jPanel_serverLayout);
         jPanel_serverLayout.setHorizontalGroup(
@@ -973,7 +978,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 383, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_serverLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(190, Short.MAX_VALUE)
                 .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_serverLayout.createSequentialGroup()
                         .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -981,10 +986,15 @@ public class Dashboard_Form extends javax.swing.JFrame {
                             .addComponent(jLabel25))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtPassive, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(chkAnonimous, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtIP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel_serverLayout.createSequentialGroup()
+                                .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtPassive, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chkAnonimous, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel_serverLayout.createSequentialGroup()
                                 .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1006,7 +1016,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
         jPanel_serverLayout.setVerticalGroup(
             jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_serverLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1015,7 +1025,10 @@ public class Dashboard_Form extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_serverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
@@ -1263,7 +1276,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         // Codigo para conectarse con servidor FTP
         String server = txtIP.getText();
-        int port = 22;
+        int port = Integer.parseInt(txtPort.getText());
         String user = txtUser.getText();
         String pass = new String(txtPass.getPassword());        
        
@@ -1727,6 +1740,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1761,6 +1775,7 @@ public class Dashboard_Form extends javax.swing.JFrame {
     private javax.swing.JTextField txtMQ2present;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtPassive;
+    private javax.swing.JTextField txtPort;
     private javax.swing.JTextField txtPresent;
     private javax.swing.JTextField txtSensor;
     private javax.swing.JTextField txtSensorResistance;

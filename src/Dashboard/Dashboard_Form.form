@@ -317,30 +317,6 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txtEnabled" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  <Component id="txtPresent" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="chkPresent" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="chkEnabled" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="txtSensor" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                       <Group type="102" attributes="0">
@@ -399,8 +375,32 @@
                                                   <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Component id="txtEnabled" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                                              <Component id="txtPresent" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="0" attributes="0">
+                                                              <Component id="chkPresent" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="chkEnabled" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <Component id="txtSensor" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="103" groupAlignment="1" attributes="0">
@@ -905,7 +905,7 @@
                       <EmptySpace min="0" pref="383" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="190" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -914,10 +914,16 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="txtPassive" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="chkAnonimous" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtIP" alignment="0" min="-2" pref="282" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="txtPassive" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="chkAnonimous" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtIP" alignment="0" min="-2" pref="282" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="txtPort" min="-2" pref="90" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -949,7 +955,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                       <Component id="jLabel2" min="-2" pref="65" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="label1" min="-2" max="-2" attributes="0"/>
@@ -958,7 +964,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel24" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtIP" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="txtIP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -1136,6 +1146,16 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConnectActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Port"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtPort">
             </Component>
           </SubComponents>
         </Container>
